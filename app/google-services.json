@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "513108448399",
+    "project_id": "xisd6329app",
+    "storage_bucket": "xisd6329app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513108448399:android:39c05c92eadc72dfe74cfa",
+        "android_client_info": {
+          "package_name": "com.example.sba_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO6cyadgHnSySx9-r7wwj2eN0JUlkVmfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513108448399:android:d191b0bacff6a0a2e74cfa",
+        "android_client_info": {
+          "package_name": "com.example.xisd6329_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO6cyadgHnSySx9-r7wwj2eN0JUlkVmfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513108448399:android:de255c1c58fdb3e4e74cfa",
+        "android_client_info": {
+          "package_name": "com.example.xisd6329_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO6cyadgHnSySx9-r7wwj2eN0JUlkVmfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
