@@ -74,9 +74,13 @@ class MainActivity : ComponentActivity() {
                 Log.d("Firebase", hostList.toString())
 //                    this was jerryrigged from the log in code, but hey it kinda works??
                 val list = hostList.toString().toString()
-                textViewList!!.setText(list)
+//                textViewList!!.setText(list)
+//split isnt working :(
+//                got from https://www.baeldung.com/kotlin/split-string
+                val splitlist = list.split("},")
                 // borrowed from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
-                val dataset = arrayOf(hostList.toString().toString())
+//                val dataset = arrayOf(hostList.toString().toString())
+                val dataset = splitlist.toTypedArray()
                 adapter = CustomAdapter(dataset)
                 recyclerView.adapter = adapter
 
