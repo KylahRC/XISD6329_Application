@@ -66,10 +66,15 @@ class MainActivity : ComponentActivity() {
             .get()
             .addOnSuccessListener { result ->
                 val hostList = mutableListOf<HostData>()
+                //emergency code due to time, source needed!
+                val formattedList = mutableListOf<String>()
                 for (document in result) {
                     val host = document.toObject(HostData::class.java)
                     hostList.add(host)
 
+                    //emergency code due to time, source needed!
+                    val formatted = host.formatWithId(document.id)
+                    formattedList.add(formatted)
                 }
                 Log.d("Firebase", hostList.toString())
 //                    this was jerryrigged from the log in code, but hey it kinda works??
@@ -80,9 +85,14 @@ class MainActivity : ComponentActivity() {
                 val splitlist = list.split("},")
                 // borrowed from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
 //                val dataset = arrayOf(hostList.toString().toString())
-                val dataset = splitlist.toTypedArray()
+//                val dataset = splitlist.toTypedArray()
+
+                //emergency code due to time, source needed!
+                val dataset = formattedList.toTypedArray()
                 adapter = CustomAdapter(dataset)
                 recyclerView.adapter = adapter
+
+
 
             }
             .addOnFailureListener {

@@ -10,3 +10,19 @@ data class HostData
         val Host_PhoneNumber: String = ""
     )
 //Made the same way as last semesters projects, and how we learnt in OPSC
+{
+    //emergency code due to time, source needed!
+    fun formatWithId(id: String): String {
+        return """
+            Host: $id
+            Name: $Host_Name
+            Surname: $Host_Surname
+            Address: $Host_Address
+            Area: $Host_Area
+            Bathroom: $Host_Bathroom
+            Phone: $Host_PhoneNumber
+            
+            
+        """.trimIndent()
+    }
+}
