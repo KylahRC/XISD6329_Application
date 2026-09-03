@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.firestore
@@ -21,8 +23,9 @@ class MainActivity : ComponentActivity() {
     var textViewList: TextView? = null
     var user: FirebaseUser? = null
 
-    var list: String? = null
+    private lateinit var recyclerView: RecyclerView
 
+    private lateinit var adapter: CustomAdapter
 
     val db = FirebaseFirestore.getInstance()
 
@@ -32,6 +35,9 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
 
+        // taken from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
+        recyclerView = findViewById(R.id.my_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         auth = FirebaseAuth.getInstance()
         button = findViewById<Button>(R.id.logout)
@@ -67,11 +73,18 @@ class MainActivity : ComponentActivity() {
                 }
                 Log.d("Firebase", hostList.toString())
 //                    this was jerryrigged from the log in code, but hey it kinda works??
-                list = hostList.toString().toString()
+                val list = hostList.toString().toString()
                 textViewList!!.setText(list)
+                // borrowed from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
+                val dataset = arrayOf(hostList.toString().toString())
+                adapter = CustomAdapter(dataset)
+                recyclerView.adapter = adapter
+
             }
             .addOnFailureListener {
                 Log.e("Firebase", it.message.toString())
             }
+
+
     }
     }
