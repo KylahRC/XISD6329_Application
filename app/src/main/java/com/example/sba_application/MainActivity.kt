@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
         })
 
 //        sourced from https://medium.com/@deveshsharma7618/firebase-crud-operations-in-kotlin-for-android-cef1f74386d9#:~:text=db.collection(%22users%22)%0A%20%20%20%20.get,%22Firebase%22%2C%20it.message.toString())%0A%20%20%20%20%20%20%20%20%7D%0A%7D
-        db.collection("HostFamilies")
+        db.collection("Host Families")
             .get()
             .addOnSuccessListener { result ->
                 val hostList = mutableListOf<HostData>()
