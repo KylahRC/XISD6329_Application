@@ -1,31 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_height="match_parent"
-    tools:context = "MainActivity">
-
-
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/user_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Dr Steven" />
+        android:text="Hello Dr Steven"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <Button
-        android:text="@string/logout"
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:text="@string/logout"
+
+
+        tools:layout_editor_absoluteX="319dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/hosts"
-        android:layout_width="411dp"
-        android:layout_height="99dp"
-        android:text="Hosts" />
-</LinearLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hosts"
+        app:layout_constraintTop_toBottomOf="@id/logout"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
