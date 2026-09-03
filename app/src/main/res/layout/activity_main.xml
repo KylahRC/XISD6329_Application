@@ -41,11 +41,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="10dp"
         android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hosts" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonFilter" />
 <!-- taken from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin-->
-    />
+
+    <Spinner
+        android:id="@+id/spinnerArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/areas_array"
+        app:layout_constraintTop_toBottomOf="@+id/hosts"
+
+        android:layout_margin="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerBathroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/bathroom_array"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerArea"
+
+        android:layout_margin="8dp"/>
+
+    <Button
+        android:id="@+id/buttonFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Apply Filter"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBathroom"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,4 +10,17 @@
     <string name="click_to_register">Click to register</string>
     <string name="logout">Logout</string>
 
+<!--    spinner options-->
+    <string-array name="areas_array">
+        <item>All</item>
+        <item>Hout Bay</item>
+        <item>Other Area</item>
+    </string-array>
+
+    <string-array name="bathroom_array">
+        <item>All</item>
+        <item>Shared</item>
+        <item>Private</item>
+    </string-array>
+
 </resources>
