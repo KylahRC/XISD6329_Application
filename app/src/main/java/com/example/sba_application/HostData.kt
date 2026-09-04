@@ -9,7 +9,8 @@ data class HostData
         val Host_Bathroom: String = "",
         val Host_PhoneNumber: String = ""
     )
-//Made the same way as last semesters projects, and how we learnt in OPSC
+//Made the same way as last semesters projects, and how we learnt in OPSC.
+
 {
     //emergency code due to time, source needed!
     fun formatWithId(id: String): String {

@@ -19,17 +19,18 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : ComponentActivity() {
+    //Declaring  Firebase Authentication and current user variables.
     var auth: FirebaseAuth? = null
     var button: Button? = null
     var textViewUser: TextView? = null
     var textViewList: TextView? = null
     var user: FirebaseUser? = null
 
-
+//RecyclerView and adapter references for displaying lists efficiently.
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: CustomAdapter
-
+//Instance of Cloud Firebase Database.
     val db = FirebaseFirestore.getInstance()
 
 
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        //Initialising the RecyclerView and setting its layout manager.
         // taken from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
         recyclerView = findViewById(R.id.my_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -52,6 +53,7 @@ class MainActivity : ComponentActivity() {
         textViewList = findViewById<TextView>(R.id.hosts)
         user = auth!!.getCurrentUser()
 
+        // Checking if no user is logged in.
         if (user == null) {
             val intent = Intent(getApplicationContext(), Login::class.java)
             startActivity(intent)
@@ -74,7 +76,8 @@ class MainActivity : ComponentActivity() {
             val selectedBathroom = spinnerBathroom.selectedItem.toString()
 
 //            was there a better way? perhaps
-//            did i have time to find one? no
+//            did I have time to find one? no
+            // This is a conditional routing (allegedly) based on what filters the user picked.
             if (selectedArea == "All" && selectedBathroom == "All")
             {
                 displayRecords()
@@ -145,7 +148,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
-
+//Helper function to process the Firebase query and bind it to the RecyclerView adapter.
     fun displayHosts(result: com.google.firebase.firestore.QuerySnapshot)
     {
 //        mostly same, taken from old display
@@ -161,7 +164,8 @@ class MainActivity : ComponentActivity() {
         recyclerView.adapter = adapter
     }
 
-//    pretty much all code from here needs a reference! link the source!!
+    //    Source to be attached soon
+    //    Fetches all the records from host families that do not have any filters attached to them.
     fun displayRecords()
     {
         db.collection("Host Families")
@@ -169,7 +173,7 @@ class MainActivity : ComponentActivity() {
             .addOnSuccessListener { result -> displayHosts(result) }
             .addOnFailureListener { Log.e("Firebase", it.message.toString()) }
     }
-
+    // Queries the Firestore filtered strictly by the selected area.
     fun filterArea(area: String)
     {
         db.collection("Host Families")
@@ -178,7 +182,7 @@ class MainActivity : ComponentActivity() {
             .addOnSuccessListener { result -> displayHosts(result) }
             .addOnFailureListener { Log.e("Firebase", it.message.toString()) }
     }
-
+    // Queries the Firestore filtered strictly by the selected Bathroom option.
     fun filterBathroom(bathroom: String)
     {
         db.collection("Host Families")
@@ -188,6 +192,7 @@ class MainActivity : ComponentActivity() {
             .addOnFailureListener { Log.e("Firebase", it.message.toString()) }
     }
 
+    //  filters strictly by the selected area and bathroom option.
     fun filterBoth(area: String, bathroom: String)
     {
         db.collection("Host Families")
