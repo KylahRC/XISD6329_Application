@@ -6,34 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/ReturnBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Dashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/user_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:text="Hello Dr Steven"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ReturnBtn" />
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/logout"
+        android:layout_marginStart="168dp"
 
-        app:layout_constraintTop_toBottomOf="@id/user_details"
-        tools:layout_editor_absoluteX="302dp"
-        tools:ignore="MissingConstraints" />
+
+        android:text="@string/logout"
+        app:layout_constraintStart_toEndOf="@+id/ReturnBtn"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/hosts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
         android:text="Filters"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logout" />
+        app:layout_constraintTop_toBottomOf="@+id/user_details" />
 
     <TextView
         android:id="@+id/AreaFilLabel"

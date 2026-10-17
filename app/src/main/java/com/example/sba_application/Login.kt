@@ -28,7 +28,10 @@ class Login : AppCompatActivity() {
         // Check if user is signed in (non-null)
         val currentUser = mAuth!!.getCurrentUser()
         if (currentUser != null) {
-            val intent = Intent(getApplicationContext(), MainActivity::class.java)
+            Intent(
+                this,
+                Dashboard::class.java
+            )
             startActivity(intent)
             finish()
         }
@@ -88,7 +91,7 @@ class Login : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 val intent =
-                                    Intent(getApplicationContext(), MainActivity::class.java)
+                                    Intent(getApplicationContext(), Dashboard::class.java)
                                 startActivity(intent)
                                 finish()
                             } else {
