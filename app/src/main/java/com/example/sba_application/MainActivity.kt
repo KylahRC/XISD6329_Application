@@ -17,6 +17,7 @@ import com.google.firebase.firestore.firestore
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 
 class MainActivity : ComponentActivity() {
     var auth: FirebaseAuth? = null
@@ -94,51 +95,6 @@ class MainActivity : ComponentActivity() {
         }
 
 
-//        olddisplay()
-
-
-
-    }
-
-    fun olddisplay()
-    {
-//        sourced from https://medium.com/@deveshsharma7618/firebase-crud-operations-in-kotlin-for-android-cef1f74386d9#:~:text=db.collection(%22users%22)%0A%20%20%20%20.get,%22Firebase%22%2C%20it.message.toString())%0A%20%20%20%20%20%20%20%20%7D%0A%7D
-        db.collection("Host Families")
-            .get()
-            .addOnSuccessListener { result ->
-                val hostList = mutableListOf<HostData>()
-                //emergency code due to time, source needed!
-                val formattedList = mutableListOf<String>()
-                for (document in result) {
-                    val host = document.toObject(HostData::class.java)
-                    hostList.add(host)
-
-                    //emergency code due to time, source needed!
-                    val formatted = host.formatWithId(document.id)
-                    formattedList.add(formatted)
-                }
-                Log.d("Firebase", hostList.toString())
-//                    this was jerryrigged from the log in code, but hey it kinda works??
-                val list = hostList.toString().toString()
-//                textViewList!!.setText(list)
-//split isnt working :(
-//                got from https://www.baeldung.com/kotlin/split-string
-                val splitlist = list.split("},")
-                // borrowed from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
-//                val dataset = arrayOf(hostList.toString().toString())
-//                val dataset = splitlist.toTypedArray()
-
-                //emergency code due to time, source needed!
-                val dataset = formattedList.toTypedArray()
-                adapter = CustomAdapter(dataset)
-                recyclerView.adapter = adapter
-
-
-
-            }
-            .addOnFailureListener {
-                Log.e("Firebase", it.message.toString())
-            }
 
 
 
@@ -146,18 +102,21 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    fun displayHosts(result: com.google.firebase.firestore.QuerySnapshot)
+    fun displayHosts(result: QuerySnapshot)
     {
-//        mostly same, taken from old display
-//        basicallly just formats the text
-        val formattedList = mutableListOf<String>()
-        for (document in result) {
+        val hostList = mutableListOf<HostData>()
+
+        for (document in result)
+        {
             val host = document.toObject(HostData::class.java)
-            val formatted = host.formatWithId(document.id)
-            formattedList.add(formatted)
+
+            host.hostId = document.id
+
+            hostList.add(host)
         }
-        val dataset = formattedList.toTypedArray()
-        adapter = CustomAdapter(dataset)
+
+        adapter = CustomAdapter(hostList)
+
         recyclerView.adapter = adapter
     }
 

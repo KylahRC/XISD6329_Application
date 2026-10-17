@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".DetailedHost" />
+        <activity
             android:name=".Login"
             android:theme="@style/Theme.Material3.Dark.NoActionBar"
             android:exported="true">

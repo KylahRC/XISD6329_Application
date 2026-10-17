@@ -1,5 +1,6 @@
 package com.example.sba_application
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,19 +9,38 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 // borrowed from https://developer.android.com/develop/ui/views/layout/recyclerview#kotlin
-class CustomAdapter(private val dataSet: Array<String>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(
+    private val dataSet: List<HostData>
+) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder)
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
 
-        init {
-            // Define click listener for the ViewHolder's View
-            textView = view.findViewById(R.id.textView)
+        private val textView: TextView =
+            view.findViewById(R.id.textView)
+
+        fun bind(host: HostData) {
+
+            textView.text =
+                "${host.Host_Name} ${host.Host_Surname}"
+
+            itemView.setOnClickListener {
+
+                val intent = Intent(
+                    itemView.context,
+                    DetailedHost::class.java
+                )
+
+                intent.putExtra(
+                    "HOST_ID",
+                    host.hostId
+                )
+
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
@@ -33,13 +53,18 @@ class CustomAdapter(private val dataSet: Array<String>) :
         return ViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int
+    ) {
+
+        holder.bind(
+            dataSet[position]
+        )
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+
 }
