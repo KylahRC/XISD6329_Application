@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="HardcodedText"
     tools:context=".MainActivity">
 
+<!--    Im thinking to make the background the dark blue from the logo and then the buttons be that teal colour-->
     <Button
         android:id="@+id/ReturnBtn"
         android:layout_width="wrap_content"
@@ -21,7 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Hello Dr Steven"
+        tools:ignore="HardcodedText"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ReturnBtn" />
 
@@ -44,6 +47,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="9dp"
         android:text="Filters"
+        tools:ignore="HardcodedText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_details" />
 
@@ -54,6 +58,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Area:"
+        tools:ignore="HardcodedText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hosts" />
 
@@ -63,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Bathroom:"
+        tools:ignore="HardcodedText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerArea" />
 
@@ -85,11 +91,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_marginTop="8dp"
+
         android:text="Apply Filter"
         app:layout_constraintTop_toBottomOf="@+id/spinnerBathroom"
         tools:ignore="MissingConstraints"
+
         tools:layout_editor_absoluteX="16dp" />
 
+<!--    The names are like really small and hard to click, can you make them bigger and more separated?-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"

@@ -91,6 +91,7 @@ class MainActivity : ComponentActivity()
         }
         else
         {
+//            literally just to make sure whos logged in, not actually useful to the app besides testing
             textViewUser?.text =
                 user?.email
         }
@@ -142,16 +143,11 @@ class MainActivity : ComponentActivity()
 
         buttonFilter.setOnClickListener {
 
-            val selectedArea =
-                spinnerArea.selectedItem.toString()
+            val selectedArea = spinnerArea.selectedItem.toString()
 
-            val selectedBathroom =
-                spinnerBathroom.selectedItem.toString()
+            val selectedBathroom = spinnerBathroom.selectedItem.toString()
 
-            applyFilters(
-                selectedArea,
-                selectedBathroom
-            )
+            applyFilters(selectedArea, selectedBathroom)
         }
     }
 
@@ -161,22 +157,25 @@ class MainActivity : ComponentActivity()
 
     private fun applyFilters(area: String,bathroom: String)
     {
-
+//no filters
         if (area == "All" && bathroom == "All")
         {
 
             displayRecords()
         }
+        //specify area
         else if (area != "All" && bathroom == "All")
         {
 
             filterArea(area)
         }
+        //specify bathroom
         else if (area == "All" && bathroom != "All")
         {
 
             filterBathroom(bathroom)
         }
+        //specify both
         else
         {
 
@@ -188,11 +187,11 @@ class MainActivity : ComponentActivity()
 
     //region RecyclerView
 
+    //make records into list for display
     private fun displayHosts(result: com.google.firebase.firestore.QuerySnapshot)
     {
 
-        val hostList =
-            mutableListOf<HostData>()
+        val hostList = mutableListOf<HostData>()
 
         for (document in result)
         {
@@ -213,6 +212,7 @@ class MainActivity : ComponentActivity()
 
     //region Firebase Queries
 
+    //this is where the code gets the stuff from firestore
     fun displayRecords()
     {
 

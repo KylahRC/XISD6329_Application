@@ -22,10 +22,11 @@ class CustomAdapter(
         private val textView: TextView =
             view.findViewById(R.id.textView)
 
-        fun bind(host: HostData) {
+        fun bind(host: HostData)
+        {
 
-            textView.text =
-                "${host.Host_Name} ${host.Host_Surname}"
+            //currently just put the name of the host to be clicked on, idk what other info to put tbh
+            textView.text = "${host.Host_Name} ${host.Host_Surname}"
 
             itemView.setOnClickListener {
 

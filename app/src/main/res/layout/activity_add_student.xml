@@ -2,14 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="HardcodedText"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!--    Need a basic input form here for the student
+        Also blue bg and teal buttns-->
     <Button
         android:id="@+id/ReturnBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dashboard"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

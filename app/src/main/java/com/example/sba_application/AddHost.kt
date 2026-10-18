@@ -21,6 +21,9 @@ class AddHost : ComponentActivity()
             )
 
             startActivity(intent)
+
+            //this will be for adding new host families to the database
+            //May need to ask client about what info they usually record again just in case
         }
     }
 }

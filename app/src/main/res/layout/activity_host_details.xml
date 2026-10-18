@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    Honestly not sure how to play designing this-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +35,7 @@
             android:id="@+id/txtBathroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Bathroom"/>
 
         <!-- Address -->
@@ -41,6 +43,7 @@
             android:id="@+id/txtAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Address"/>
 
         <!-- Phone -->
@@ -48,6 +51,7 @@
             android:id="@+id/txtPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Phone"/>
 
         <!-- Email -->
@@ -55,6 +59,7 @@
             android:id="@+id/txtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Email"/>
 
         <!-- Separator -->
@@ -63,6 +68,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            tools:ignore="HardcodedText"
             android:background="#CCCCCC"/>
 
         <!-- Booking Section -->
@@ -70,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Current Bookings"
+            tools:ignore="HardcodedText"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -77,6 +84,7 @@
             android:id="@+id/txtBookings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="No bookings found"/>
 
         <!-- Buttons -->
@@ -85,18 +93,21 @@
             android:id="@+id/btnAddBooking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Add Booking"/>
 
         <Button
             android:id="@+id/btnCallHost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Call Host"/>
 
         <Button
             android:id="@+id/btnEmailHost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"
             android:text="Email Host"/>
 
     </LinearLayout>

@@ -21,6 +21,9 @@ class AddStudent: ComponentActivity()
             )
 
             startActivity(intent)
+
+            //this will be for adding new students to the database
+            //May need to ask client about what info they usually record again just in case
         }
     }
 }

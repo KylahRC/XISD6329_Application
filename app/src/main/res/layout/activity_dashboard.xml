@@ -1,11 +1,16 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
+    tools:ignore="HardcodedText"
     android:orientation="vertical"
     android:padding="16dp">
 
+<!--    Again the dark blue background from the logo would go well as the background colour
+        Also the buttons being teal would be cool
+        Maybe add the logo as an image above the buttons??
+        Might need log out button here-->
     <Button
         android:id="@+id/btnAddHost"
         android:layout_width="match_parent"
