@@ -1,34 +1,118 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dashboard Activity Layout (This is phase 1/5 of UI  and clean up section.)
+    Serves as the main control center for Study Better Agency administrators.
+    Provides navigation to Add Host, Add Student, Manage Bookings and Account Logout.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    tools:ignore="HardcodedText"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/sba_dark_navy"
+    android:fillViewport="true"
+    tools:ignore="HardcodedText">
 
-<!--    Again the dark blue background from the logo would go well as the background colour
-        Also the buttons being teal would be cool
-        Maybe add the logo as an image above the buttons??
-        Might need log out button here-->
-    <Button
-        android:id="@+id/btnAddHost"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Host"/>
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnAddStudent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add Student"/>
+        <!-- Study Better Agency Brand Logo -->
+        <ImageView
+            android:id="@+id/imgSbaLogo"
+            android:layout_width="180dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Study Better Agency Logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sba_logo" />
 
-    <Button
-        android:id="@+id/btnManageBookings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Manage Bookings"/>
+        <!-- Header section: Dashboard Overview -->
+        <TextView
+            android:id="@+id/tvDashboardHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Dashboard"
+            android:textColor="@color/text_white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvDashboardSubheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="Select an action to manage accommodations or students."
+            android:textColor="@color/text_muted"
+            android:textSize="14sp" />
+
+        <!-- This is the main action section. -->
+        <!-- Button 1: Adds host family -->
+        <Button
+            android:id="@+id/btnAddHost"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/sba_teal_accent"
+            android:text="Add Host"
+            android:textColor="@color/sba_dark_navy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <!-- Button 2: Adding student profile -->
+        <Button
+            android:id="@+id/btnAddStudent"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/sba_teal_accent"
+            android:text="Add Student"
+            android:textColor="@color/sba_dark_navy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <!-- This button: 3 Manages bookings and search hosts -->
+        <Button
+            android:id="@+id/btnManageBookings"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/sba_teal_accent"
+            android:text="Manage Bookings"
+            android:textColor="@color/sba_dark_navy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <!-- Space buffer to push logout button cleanly toward bottom -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="40dp" />
+
+        <!-- Logout action button -->
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/sba_card_bg"
+            android:text="Log Out"
+            android:textColor="@color/sba_logo_coral"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/sba_logo_coral"
+            app:strokeWidth="1dp" />
+
+    </LinearLayout>
+</ScrollView>

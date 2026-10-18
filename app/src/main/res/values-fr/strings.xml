@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Study Better Agency</string>
+    <string name="welcome_message">Bienvenue sur Study Better</string>
+
+    <!-- adding actions and buttons -->
+    <string name="btn_login">Se Connecter</string>
+    <string name="btn_search_hosts">Rechercher des Familles d\'Accueil</string>
+    <string name="btn_add_host">Ajouter une Famille d\'Accueil</string>
+    <string name="btn_add_student">Ajouter un Étudiant</string>
+    <string name="btn_logout">Déconnexion</string>
+</resources>

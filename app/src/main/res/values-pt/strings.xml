@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Study Better Agency</string>
+    <string name="welcome_message">Bem-vindo ao Study Better</string>
+
+    <!-- just like the Fench file we are adding actions and buttons here too-->
+    <string name="btn_login">Entrar</string>
+    <string name="btn_search_hosts">Buscar Famílias de Acolhimento</string>
+    <string name="btn_add_host">Adicionar Família de Acolhimento</string>
+    <string name="btn_add_student">Adicionar Estudante</string>
+    <string name="btn_logout">Sair</string>
+</resources>
