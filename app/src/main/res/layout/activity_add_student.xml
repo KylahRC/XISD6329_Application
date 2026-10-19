@@ -1,19 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Add Student Activity Layout (This is also part of Phase B)
+    Provides a dark navy form interface for registering new student profiles in the SBA database. (The background is to be edited to match the
+    logo dark blue at a later stage of development)
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="HardcodedText"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/sba_dark_navy"
+    android:fillViewport="true"
+    tools:context=".AddStudent"
+    tools:ignore="HardcodedText">
 
-<!--    Need a basic input form here for the student
-        Also blue bg and teal buttns-->
-    <Button
-        android:id="@+id/ReturnBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dashboard"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Top Navigation Button -->
+        <Button
+            android:id="@+id/ReturnBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/sba_card_bg"
+            android:text="← Dashboard"
+            android:textColor="@color/text_white"
+            android:textSize="13sp"
+            app:cornerRadius="8dp" />
+
+        <!-- Header Titles -->
+        <TextView
+            android:id="@+id/tvAddStudentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Add Student Profile"
+            android:textColor="@color/text_white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAddStudentSubheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:text="Register student details for host family matching."
+            android:textColor="@color/text_muted"
+            android:textSize="13sp" />
+
+        <!-- Card Container Form Layout -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/sba_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Student Full Name -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student Full Name"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etStudentName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. Jane Doe"
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Student Emails -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Student Email"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etStudentEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. student@university.ac.za"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Preferred campus -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Institution / Campus"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etStudentCampus"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. Cape Town Campus"
+                    android:inputType="text"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Save Button Action -->
+                <Button
+                    android:id="@+id/btnAddStudentSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/sba_teal_accent"
+                    android:text="Save Student Record"
+                    android:textColor="@color/sba_dark_navy"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

@@ -1,14 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Adding Host Activity Layout (Phase B Data Entry Form). This was initially phase 4 of the plan but due to time constraints ive had to fast track it.
+    Provides a structured input form for registering host accommodation details into Firebase Firestore.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/sba_dark_navy"
+    android:fillViewport="true"
+    tools:context=".AddHost"
+    tools:ignore="HardcodedText">
 
-    <Button
-        android:id="@+id/ReturnBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dashboard"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Navigation Bar -->
+        <Button
+            android:id="@+id/ReturnBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/sba_card_bg"
+            android:text="← Dashboard"
+            android:textColor="@color/text_white"
+            android:textSize="13sp"
+            app:cornerRadius="8dp" />
+
+        <!-- Screen Header -->
+        <TextView
+            android:id="@+id/tvAddHostTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Add Host Family"
+            android:textColor="@color/text_white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAddHostSubheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:text="Enter host details below to publish a new listing."
+            android:textColor="@color/text_muted"
+            android:textSize="13sp" />
+
+        <!-- Card Container for Form Input Fields -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/sba_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Host Name -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Host Full Name"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etHostName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. John Smith"
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Location or Area -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Area / Location"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerHostArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/areas_array" />
+
+                <!-- Bathroom Type -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Bathroom Type"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerHostBathroom"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/bathroom_array" />
+
+                <!-- Contact Number -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Contact Number"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etHostPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. +27 82 123 4567"
+                    android:inputType="phone"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <!-- Submit Action Button -->
+                <Button
+                    android:id="@+id/btnAddHostSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/sba_teal_accent"
+                    android:text="Save Host Record"
+                    android:textColor="@color/sba_dark_navy"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
