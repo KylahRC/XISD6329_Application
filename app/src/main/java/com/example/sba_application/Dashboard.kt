@@ -3,13 +3,17 @@ package com.example.sba_application
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
 /**
  * Dashboard Activity
+ *
  * Central navigation screen for the Study Better Agency application.
- * Manages UI user transitions between AddHost, AddStudent, MainActivity (Manage Bookings),
+ *
+ * Manages UI user transitions between AddHost, AddStudent, SearchHosts, MainActivity (Manage Bookings),
+ *
  * and performs session termination (Logout) using Firebase Auth.
  */
 class Dashboard : AppCompatActivity() {
@@ -19,6 +23,7 @@ class Dashboard : AppCompatActivity() {
     // Navigation and Action Button UI Declarations
     private lateinit var btnAddHost: Button
     private lateinit var btnAddStudent: Button
+    private lateinit var btnSearchHosts: Button
     private lateinit var btnManageBookings: Button
     private lateinit var btnLogout: Button
 
@@ -31,6 +36,7 @@ class Dashboard : AppCompatActivity() {
 
     /**
      * Called when the activity is first created. Initializes screen components,
+     *
      * connects view bindings, and establishes click listener event handling.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +61,7 @@ class Dashboard : AppCompatActivity() {
     private fun initialiseViews() {
         btnAddHost = findViewById(R.id.btnAddHost)
         btnAddStudent = findViewById(R.id.btnAddStudent)
+        btnSearchHosts = findViewById(R.id.btnSearchHosts)
         btnManageBookings = findViewById(R.id.btnManageBookings)
         btnLogout = findViewById(R.id.btnLogout)
     }
@@ -65,6 +72,7 @@ class Dashboard : AppCompatActivity() {
 
     /**
      * Assigns event click listeners to dashboard buttons to navigate across application modules
+     *
      * or log out of the current session cleanly.
      */
     private fun setupButtons() {
@@ -89,14 +97,23 @@ class Dashboard : AppCompatActivity() {
             )
         }
 
-        // Navigates to MainActivity to filter and manage host family bookings
-        btnManageBookings.setOnClickListener {
+        // Navigates to MainActivity to filter and view host family listings
+        btnSearchHosts.setOnClickListener {
             startActivity(
                 Intent(
                     this,
                     MainActivity::class.java
                 )
             )
+        }
+
+        // Handles booking management overview
+        //linked this button to earch and manage hosts to avoid having a button on the dashboard that is not functional.
+        btnManageBookings.setOnClickListener {
+            Toast.makeText(this, "Opening active bookings overview...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("FILTER_MODE", "BOOKINGS")
+            startActivity(intent)
         }
 
         // Signs out the user from Firebase and returns them to the Login screen

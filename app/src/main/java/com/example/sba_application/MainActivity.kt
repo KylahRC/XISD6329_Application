@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     //endregion
 
-    //region Authentication & Session Management
+    //region Authentication and Session Management
 
     /**
      * Confirms active authentication state and redirects to login screen if null.

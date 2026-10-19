@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Dashboard Activity Layout (This is phase 1/5 of UI  and clean up section.)
+    Dashboard Activity Layout (This is phase 1/5 of UI and clean up section.)
     Serves as the main control center for Study Better Agency administrators.
-    Provides navigation to Add Host, Add Student, Manage Bookings and Account Logout.
+    Provides navigation to Add Host, Add Student, Search and Filter Hosts, Manage Bookings and Account Logout.
 -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -79,15 +79,28 @@
             android:textStyle="bold"
             app:cornerRadius="10dp" />
 
-        <!-- This button: 3 Manages bookings and search hosts -->
+        <!-- Button 3: Search and filter host families (Opens MainActivity) -->
+        <Button
+            android:id="@+id/btnSearchHosts"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/sba_teal_accent"
+            android:text="Search &amp; Filter Hosts"
+            android:textColor="@color/sba_dark_navy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
+
+        <!-- This button: 4 Manages bookings -->
         <Button
             android:id="@+id/btnManageBookings"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/sba_teal_accent"
+            android:backgroundTint="@color/sba_card_bg"
             android:text="Manage Bookings"
-            android:textColor="@color/sba_dark_navy"
+            android:textColor="@color/text_white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="10dp" />
