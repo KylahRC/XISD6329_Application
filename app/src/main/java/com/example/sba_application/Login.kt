@@ -1,6 +1,5 @@
 package com.example.sba_application
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,18 +7,22 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 /**
  * Login Activity
  * Entry point for authentication. Allows registered users to log into SBA.
- * Includes Firebase Authentication listeners and user-selectable theme toggling.
+ * Includes Firebase Authentication listeners, Google Single Sign-On (SSO), and user-selectable theme toggling.
  */
 class Login : AppCompatActivity() {
 
@@ -27,8 +30,25 @@ class Login : AppCompatActivity() {
     var editTextEmail: TextInputEditText? = null
     var editTextPassword: TextInputEditText? = null
     var buttonLogin: Button? = null
+    var buttonGoogleSignIn: SignInButton? = null
     var mAuth: FirebaseAuth? = null
     var progressBar: ProgressBar? = null
+
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    // Google Sign-In Launcher Callback for SSO
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)!!
+            firebaseAuthWithGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            progressBar?.visibility = View.GONE
+            Toast.makeText(this, "Google Sign-In Failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
     //endregion
 
     override fun onStart() {
@@ -49,10 +69,18 @@ class Login : AppCompatActivity() {
         // Initialize Firebase Auth reference
         mAuth = FirebaseAuth.getInstance()
 
+        // Configure Google Sign-In options
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
         // Bind layout objects from activity_login.xml
         editTextEmail = findViewById(R.id.email)
         editTextPassword = findViewById(R.id.password)
         buttonLogin = findViewById(R.id.btn_login)
+        buttonGoogleSignIn = findViewById(R.id.btnGoogleSignIn)
         progressBar = findViewById(R.id.progressBar)
 
         // Set login button listener to handle credentials submission
@@ -87,6 +115,32 @@ class Login : AppCompatActivity() {
                     }
                 }
         }
+
+        // Set Google Sign-In SSO button click listener
+        buttonGoogleSignIn?.setOnClickListener {
+            progressBar?.visibility = View.VISIBLE
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(signInIntent)
+        }
+    }
+
+    /**
+     * Authenticates Firebase session using Google Credential ID Token.
+     */
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        mAuth?.signInWithCredential(credential)
+            ?.addOnSuccessListener {
+                progressBar?.visibility = View.GONE
+                Toast.makeText(this, "Google Authentication Successful!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Dashboard::class.java)
+                startActivity(intent)
+                finish()
+            }
+            ?.addOnFailureListener { e ->
+                progressBar?.visibility = View.GONE
+                Toast.makeText(this, "Google Auth Failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     /**

@@ -9,6 +9,7 @@
     <string name="click_to_login">Click to login</string>
     <string name="click_to_register">Click to register</string>
     <string name="logout">Logout</string>
+    <string name="default_web_client_id">dummy_client_id_for_sso</string>
 
 <!--    spinner options-->
     <string-array name="areas_array">
