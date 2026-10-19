@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- changed the entire code in attempts of fixing the blank screens, used Components DayNight -->
+    <!-- The solution was adopted from https://developer.android.com/develop/ui/views/theming/themes-->
+    <style name="Theme.SBA_Application" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/sba_teal_accent</item>
+        <item name="colorPrimaryVariant">@color/sba_teal_dark</item>
+        <item name="colorOnPrimary">@color/sba_dark_navy</item>
 
-    <style name="Theme.SBA_Application" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Background and surface colors -->
+        <item name="android:windowBackground">@color/sba_dark_navy</item>
+        <item name="colorSurface">@color/sba_card_bg</item>
+
+        <!-- Status var configuration -->
+        <item name="android:statusBarColor">@color/sba_dark_navy</item>
+    </style>
 </resources>
+<!---->
