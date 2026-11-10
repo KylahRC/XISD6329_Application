@@ -22,17 +22,19 @@
         android:padding="24dp">
 
         <!-- Study Better Agency Brand Logo -->
+
+        <!-- Header section: Dashboard Overview -->
+
         <ImageView
             android:id="@+id/imgSbaLogo"
-            android:layout_width="180dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="322dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="-7dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="Study Better Agency Logo"
             android:scaleType="fitCenter"
             android:src="@drawable/sba_logo" />
 
-        <!-- Header section: Dashboard Overview -->
         <TextView
             android:id="@+id/tvDashboardHeader"
             android:layout_width="wrap_content"

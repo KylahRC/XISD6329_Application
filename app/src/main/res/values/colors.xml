@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Primary SBA Brand Colors -->
-    <color name="sba_dark_navy">#0F172A</color>       <!-- Main Dark Navy Background -->
+    <color name="sba_dark_navy">#04091F</color>       <!-- Main Dark Navy Background -->
     <color name="sba_card_bg">#1E293B</color>         <!-- Dark Card Container Background -->
     <color name="sba_teal_accent">#00C49F</color>     <!-- Accent Teal  -->
     <color name="sba_teal_dark">#008A70</color>       <!-- Darker Teal for Button Pressed States -->
