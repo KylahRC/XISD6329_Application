@@ -45,6 +45,8 @@ class DetailedHost : AppCompatActivity() {
     private var currentHostPhone: String = ""
     private var currentHostEmail: String = ""
 
+    private var currentHostId = ""
+
     private val formatter = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
     //endregion
 
@@ -56,7 +58,9 @@ class DetailedHost : AppCompatActivity() {
         setupListeners()
 
         val hostId = intent.getStringExtra("HOST_ID")
-        if (hostId != null) {
+        if (hostId != null)
+        {
+            currentHostId = hostId
             loadHost(hostId)
             loadBookings(hostId)
         }
@@ -70,7 +74,6 @@ class DetailedHost : AppCompatActivity() {
         txtPhone = findViewById(R.id.txtPhone)
         txtEmail = findViewById(R.id.txtEmail)
         txtBookings = findViewById(R.id.txtBookings)
-
         btnReturnDashboard = findViewById(R.id.btnReturnDashboard)
         btnAddBooking = findViewById(R.id.btnAddBooking)
         btnCallHost = findViewById(R.id.btnCallHost)
@@ -104,8 +107,21 @@ class DetailedHost : AppCompatActivity() {
             }
         }
 
+
+
         btnAddBooking.setOnClickListener {
-            Toast.makeText(this, "Opening booking registration...", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(
+                this,
+                AddBooking::class.java
+            )
+
+            intent.putExtra(
+                "HOST_ID",
+                currentHostId
+            )
+
+            startActivity(intent)
         }
     }
 

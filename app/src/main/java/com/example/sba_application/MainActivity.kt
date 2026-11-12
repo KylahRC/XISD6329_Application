@@ -19,7 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Provides host searching, bathroom filtering and display using RecyclerView.
  * Extends AppCompatActivity to support dynamic theme switching (Light/Dark Mode).
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
 
     //region Variables
 
@@ -44,7 +45,8 @@ class MainActivity : AppCompatActivity() {
     //region Activity Lifecycle
 
     @SuppressLint("MissingInflatedId")
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -63,7 +65,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Binds the  view objects to layut widgets and establishes Firebase instances.
      */
-    private fun initialiseViews() {
+    private fun initialiseViews()
+    {
         recyclerView = findViewById(R.id.my_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -82,11 +85,15 @@ class MainActivity : AppCompatActivity() {
     /**
      * Confirms active authentication state and redirects to login screen if null.
      */
-    private fun checkLoggedInUser() {
-        if (user == null) {
+    private fun checkLoggedInUser()
+    {
+        if (user == null)
+        {
             startActivity(Intent(applicationContext, Login::class.java))
             finish()
-        } else {
+        }
+        else
+        {
             textViewUser?.text = "Logged in: ${user?.email}"
         }
     }
@@ -94,7 +101,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Signs current user out of Firebase and returns to Login screen.
      */
-    private fun logout() {
+    private fun logout()
+    {
         auth?.signOut()
         startActivity(Intent(applicationContext, Login::class.java))
         finish()
@@ -107,7 +115,8 @@ class MainActivity : AppCompatActivity() {
     /**
      * Sets up click listeners for filter actions, navigation and theme mode toggle.
      */
-    private fun setupButtons() {
+    private fun setupButtons()
+    {
         val spinnerArea = findViewById<Spinner>(R.id.spinnerArea)
         val spinnerBathroom = findViewById<Spinner>(R.id.spinnerBathroom)
         val buttonFilter = findViewById<Button>(R.id.buttonFilter)
@@ -131,10 +140,14 @@ class MainActivity : AppCompatActivity() {
     /**
      * Switches the app between Light Mode and Dark Mode programmatically(one of the innovative features metioned in the project plan)
      */
-    fun switchThemeMode(isDarkMode: Boolean) {
-        if (isDarkMode) {
+    fun switchThemeMode(isDarkMode: Boolean)
+    {
+        if (isDarkMode)
+        {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
+        }
+        else
+        {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
@@ -143,14 +156,22 @@ class MainActivity : AppCompatActivity() {
 
     //region Filtering Logic
 
-    private fun applyFilters(area: String, bathroom: String) {
-        if (area == "All" && bathroom == "All") {
+    private fun applyFilters(area: String, bathroom: String)
+    {
+        if (area == "All" && bathroom == "All")
+        {
             displayRecords()
-        } else if (area != "All" && bathroom == "All") {
+        }
+        else if (area != "All" && bathroom == "All")
+        {
             filterArea(area)
-        } else if (area == "All" && bathroom != "All") {
+        }
+        else if (area == "All" && bathroom != "All")
+        {
             filterBathroom(bathroom)
-        } else {
+        }
+        else
+        {
             filterBoth(area, bathroom)
         }
     }

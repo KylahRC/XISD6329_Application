@@ -1,6 +1,135 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/sba_dark_navy"
+    android:fillViewport="true"
+    tools:context=".AddHost"
+    tools:ignore="HardcodedText">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Navigation Bar -->
+        <Button
+            android:id="@+id/ReturnBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/sba_card_bg"
+            android:text="← Dashboard"
+            android:textColor="@color/text_white"
+            android:textSize="13sp"
+            app:cornerRadius="8dp" />
+
+        <!-- Screen Header -->
+        <TextView
+            android:id="@+id/tvAddBookingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Add Booking"
+            android:textColor="@color/text_white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAddBookingSubheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:text="Enter booking details below to publish a new listing."
+            android:textColor="@color/text_muted"
+            android:textSize="13sp" />
+
+        <!-- Card Container for Form Input Fields -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/sba_card_bg"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Student"
+        android:textColor="@color/text_white"
+        android:textSize="13sp" />
+
+    <Spinner
+        android:id="@+id/spinnerStudent"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:entries="@array/areas_array"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Start Date"
+        android:textColor="@color/text_white"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/etStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:drawable/editbox_background"
+        android:inputType="text|date"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:hint="dd/MM/yyyy" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="End Date"
+        android:textColor="@color/text_white"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/etEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:drawable/editbox_background"
+        android:inputType="text|date"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:hint="dd/MM/yyyy" />
+
+    <Button
+        android:id="@+id/btnSaveBooking"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/sba_teal_accent"
+        android:textColor="@color/sba_dark_navy"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp"
+        android:text="Create Booking"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

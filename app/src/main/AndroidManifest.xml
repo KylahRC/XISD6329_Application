@@ -26,6 +26,8 @@
         <activity android:name=".AddHost"/>
         <activity android:name=".AddStudent"/>
         <activity
+            android:name=".AddBooking" />
+        <activity
             android:name=".DetailedHost" />
         <activity
             android:name=".Login"
