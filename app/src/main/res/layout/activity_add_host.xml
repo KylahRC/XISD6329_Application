@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Host Full Name"
+                    android:text="Host Name"
                     android:textColor="@color/text_white"
                     android:textSize="13sp" />
 
@@ -80,45 +80,54 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="6dp"
                     android:background="@android:drawable/editbox_background"
-                    android:hint="e.g. John Smith"
+                    android:hint="e.g. John"
                     android:inputType="textPersonName"
                     android:paddingHorizontal="12dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <!-- Location or Area -->
+                <!-- Host Surname -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Area / Location"
+                    android:text="Host Surname"
                     android:textColor="@color/text_white"
                     android:textSize="13sp" />
 
-                <Spinner
-                    android:id="@+id/spinnerHostArea"
+                <EditText
+                    android:id="@+id/etHostSurname"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:entries="@array/areas_array" />
+                    android:background="@android:drawable/editbox_background"
 
-                <!-- Bathroom Type -->
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:hint="e.g. Doe" />
+
+
+                <!-- Host address -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Bathroom Type"
+                    android:text="Host Street Address"
                     android:textColor="@color/text_white"
                     android:textSize="13sp" />
 
-                <Spinner
-                    android:id="@+id/spinnerHostBathroom"
+                <EditText
+                    android:id="@+id/etHostAddress"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="6dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:entries="@array/bathroom_array" />
+                    android:background="@android:drawable/editbox_background"
+
+                    android:inputType="textPostalAddress"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:hint="e.g. 5 Street Road" />
 
                 <!-- Contact Number -->
                 <TextView
@@ -140,6 +149,61 @@
                     android:paddingHorizontal="12dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
+                <!-- Host email -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Host Email"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etHostEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:hint="Email" />
+
+                <!-- Location or Area -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Area / Location"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerHostArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/areas_array"/>
+
+                <!-- Bathroom Type -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Bathroom Type"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerHostBathroom"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/bathroom_array" />
 
                 <!-- Submit Action Button -->
                 <Button
