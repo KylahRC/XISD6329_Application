@@ -67,11 +67,11 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Student Full Name -->
+                <!-- Student First Name -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Student Full Name"
+                    android:text="Student First Name"
                     android:textColor="@color/text_white"
                     android:textSize="13sp" />
 
@@ -81,11 +81,32 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="6dp"
                     android:background="@android:drawable/editbox_background"
-                    android:hint="e.g. Jane Doe"
+                    android:hint="e.g. Jane"
                     android:inputType="textPersonName"
                     android:paddingHorizontal="12dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
+                <!-- Student Surname -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student Surname"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etStudentSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="e.g. Doe"
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                   />
 
                 <!-- Student Emails -->
                 <TextView
@@ -108,26 +129,85 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <!-- Preferred campus -->
+
+                <!-- Phone -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Institution / Campus"
+                    android:text="Contact Number"
                     android:textColor="@color/text_white"
                     android:textSize="13sp" />
 
                 <EditText
-                    android:id="@+id/etStudentCampus"
+                    android:id="@+id/etStudentPhone"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="6dp"
                     android:background="@android:drawable/editbox_background"
-                    android:hint="e.g. Cape Town Campus"
-                    android:inputType="text"
+
                     android:paddingHorizontal="12dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:hint="Contact Number"
+                    android:inputType="phone" />
+
+
+                <!-- Age -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Age"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/etStudentAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:drawable/editbox_background"
+
+                    android:paddingHorizontal="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:hint="Age"
+                    android:inputType="number" />
+
+                <!-- Study -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Study"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerTypeOfStudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:entries="@array/StudyType_array"
+                    android:background="@android:drawable/btn_dropdown"/>
+
+                <!-- Institution -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Institution"
+                    android:textColor="@color/text_white"
+                    android:textSize="13sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerInstitution"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:entries="@array/Institution_array"
+                    android:background="@android:drawable/btn_dropdown"/>
 
                 <!-- Save Button Action -->
                 <Button

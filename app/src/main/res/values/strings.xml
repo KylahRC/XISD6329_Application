@@ -21,6 +21,19 @@
         <item>Other Area</item>
     </string-array>
 
+    <string-array name="StudyType_array">
+        <item>Private</item>
+        <item>Corporate</item>
+        <item>Government</item>
+    </string-array>
+
+    <string-array name="Institution_array">
+        <item>English School 1</item>
+        <item>English School 2</item>
+        <item>English School 3</item>
+        <item>English School 4</item>
+    </string-array>
+
     <string-array name="bathroom_array">
         <item>All</item>
         <item>Shared</item>

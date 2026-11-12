@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +22,14 @@ class AddStudent : AppCompatActivity() {
     private lateinit var etStudentName: EditText
     private lateinit var etStudentEmail: EditText
     private lateinit var etStudentCampus: EditText
+
+
+    private lateinit var etStudentSurname: EditText
+    private lateinit var etStudentPhone: EditText
+    private lateinit var etStudentAge: EditText
+    private lateinit var spinnerTypeOfStudy: Spinner
+    private lateinit var spinnerInstitution: Spinner
+
 
     private val db = FirebaseFirestore.getInstance()
     //endregion
@@ -41,7 +50,11 @@ class AddStudent : AppCompatActivity() {
         btnSaveStudent = findViewById(R.id.btnAddStudentSubmit)
         etStudentName = findViewById(R.id.etStudentName)
         etStudentEmail = findViewById(R.id.etStudentEmail)
-        etStudentCampus = findViewById(R.id.etStudentCampus)
+        etStudentSurname = findViewById(R.id.etStudentSurname)
+        etStudentPhone = findViewById(R.id.etStudentPhone)
+        etStudentAge = findViewById(R.id.etStudentAge)
+        spinnerTypeOfStudy = findViewById(R.id.spinnerTypeOfStudy)
+        spinnerInstitution = findViewById(R.id.spinnerInstitution)
     }
 
     /**
@@ -64,36 +77,90 @@ class AddStudent : AppCompatActivity() {
     /**
      * Validates input fields and uploads a student record to the 'Students' collection.
      */
-    private fun saveStudentToFirestore() {
-        val name = etStudentName.text.toString().trim()
-        val email = etStudentEmail.text.toString().trim()
-        val campus = etStudentCampus.text.toString().trim()
-
-        if (TextUtils.isEmpty(name)) {
-            etStudentName.error = "Please enter student name"
-            return
-        }
-
-        if (TextUtils.isEmpty(email)) {
-            etStudentEmail.error = "Please enter student email"
-            return
-        }
-
+    private fun saveStudentToFirestore()
+    {
         val studentData = hashMapOf(
-            "Student_Name" to name,
-            "Student_Email" to email,
-            "Student_Campus" to campus
+
+            "Student_Name" to
+                    etStudentName.text.toString(),
+
+            "Student_Surname" to
+                    etStudentSurname.text.toString(),
+
+            "Contact_No" to
+                    etStudentPhone.text.toString(),
+
+            "Age" to
+                    etStudentAge.text.toString(),
+
+            "Type_Of_Study" to
+                    spinnerTypeOfStudy.selectedItem.toString(),
+
+            "Institution" to
+                    spinnerInstitution.selectedItem.toString()
+
         )
 
+        createStudent(studentData)
+
+    }
+
+    private fun createStudent(
+        studentData: HashMap<String, String>
+    )
+    {
         db.collection("Students")
-            .add(studentData)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Student record saved successfully!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, Dashboard::class.java))
-                finish()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to save student: ${e.message}", Toast.LENGTH_SHORT).show()
+            .get()
+            .addOnSuccessListener { result ->
+
+                var highestNumber = 0
+
+                for(document in result)
+                {
+                    val documentId = document.id
+
+                    if(documentId.startsWith("ST"))
+                    {
+                        val number =
+                            documentId
+                                .substring(2)
+                                .toIntOrNull()
+
+                        if(number != null &&
+                            number > highestNumber)
+                        {
+                            highestNumber = number
+                        }
+                    }
+                }
+
+                val nextNumber =
+                    highestNumber + 1
+
+                val studentId =
+                    "ST%03d".format(nextNumber)
+
+                db.collection("Students")
+                    .document(studentId)
+                    .set(studentData)
+
+                    .addOnSuccessListener {
+
+                        Toast.makeText(
+                            this,
+                            "Student saved as $studentId",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        startActivity(
+                            Intent(
+                                this,
+                                Dashboard::class.java
+                            )
+                        )
+
+                        finish()
+                    }
             }
     }
 }
