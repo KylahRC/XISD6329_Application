@@ -14,35 +14,55 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class AddBooking : ComponentActivity() {
+class AddBooking : ComponentActivity()
+{
 
     //region Variables
 
+    //region Buttons
+
     private lateinit var returnBtn: Button
     private lateinit var btnSaveBooking: Button
+
+    //endregion
+
+    //region Form Controls
 
     private lateinit var spinnerStudent: Spinner
 
     private lateinit var etStartDate: EditText
     private lateinit var etEndDate: EditText
 
-    private val db = FirebaseFirestore.getInstance()
+    //endregion
 
-    private var hostId: String = ""
+    //region Firebase
+
+    private val db =
+        FirebaseFirestore.getInstance()
+
+    //endregion
+
+    //region Booking Data
+
+    private var hostId = ""
+
+    //endregion
 
     //endregion
 
     //region Activity Lifecycle
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_booking)
 
-        hostId =
-            intent.getStringExtra("HOST_ID") ?: ""
+        retrieveIntentData()
 
         initialiseViews()
+
         setupListeners()
+
         loadStudents()
     }
 
@@ -50,53 +70,104 @@ class AddBooking : ComponentActivity() {
 
     //region Initialisation
 
-    private fun initialiseViews() {
+    //region Views Initialisation
 
-        returnBtn =
-            findViewById(R.id.ReturnBtn)
+    private fun initialiseViews()
+    {
+        initialiseButtons()
 
-        btnSaveBooking =
-            findViewById(R.id.btnSaveBooking)
+        initialiseFormControls()
+    }
 
-        spinnerStudent =
-            findViewById(R.id.spinnerStudent)
+    //endregion
 
-        etStartDate =
-            findViewById(R.id.etStartDate)
+    //region Button Initialisation
 
-        etEndDate =
-            findViewById(R.id.etEndDate)
+    private fun initialiseButtons()
+    {
+        returnBtn = findViewById(R.id.ReturnBtn)
+
+        btnSaveBooking = findViewById(R.id.btnSaveBooking)
+    }
+
+    //endregion
+
+    //region Form Initialisation
+
+    private fun initialiseFormControls()
+    {
+        spinnerStudent = findViewById(R.id.spinnerStudent)
+
+        etStartDate = findViewById(R.id.etStartDate)
+
+        etEndDate = findViewById(R.id.etEndDate)
+    }
+
+    //endregion
+
+    //endregion
+
+    //region Intent Data
+
+    private fun retrieveIntentData()
+    {
+        val receivedHostId = intent.getStringExtra("HOST_ID")
+
+        if (receivedHostId != null)
+        {
+            hostId = receivedHostId
+        }
     }
 
     //endregion
 
     //region Button Setup
 
-    private fun setupListeners() {
+    private fun setupListeners()
+    {
+        setupReturnButton()
 
+        setupSaveButton()
+    }
+
+    //region Return Button
+
+    private fun setupReturnButton()
+    {
         returnBtn.setOnClickListener {
 
-            startActivity(
+            val intent =
                 Intent(
                     this,
                     Dashboard::class.java
                 )
-            )
+
+            startActivity(intent)
 
             finish()
         }
+    }
 
+    //endregion
+
+    //region Save Button
+
+    private fun setupSaveButton()
+    {
         btnSaveBooking.setOnClickListener {
+
             saveBooking()
         }
     }
 
     //endregion
 
+    //endregion
+
     //region Student Loading
 
-    private fun loadStudents() {
-
+    private fun loadStudents()
+    {
         val studentIds =
             mutableListOf<String>()
 
@@ -104,32 +175,44 @@ class AddBooking : ComponentActivity() {
             .get()
             .addOnSuccessListener { result ->
 
-                for (document in result) {
-                    studentIds.add(document.id)
+                for (document in result)
+                {
+                    studentIds.add(
+                        document.id
+                    )
                 }
 
-                val adapter =
-                    ArrayAdapter(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        studentIds
-                    )
-
-                adapter.setDropDownViewResource(
-                    android.R.layout.simple_spinner_dropdown_item
+                populateStudentSpinner(
+                    studentIds
                 )
-
-                spinnerStudent.adapter =
-                    adapter
             }
+    }
+
+    private fun populateStudentSpinner(
+        studentIds: List<String>
+    )
+    {
+        val adapter =
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                studentIds
+            )
+
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
+
+        spinnerStudent.adapter =
+            adapter
     }
 
     //endregion
 
     //region Booking Creation
 
-    private fun saveBooking() {
-
+    private fun saveBooking()
+    {
         val studentId =
             spinnerStudent.selectedItem.toString()
 
@@ -139,24 +222,16 @@ class AddBooking : ComponentActivity() {
         val endDateString =
             etEndDate.text.toString().trim()
 
-        if (TextUtils.isEmpty(startDateString)) {
-
-            etStartDate.error =
-                "Please enter a start date"
-
+        if (!validateForm(
+                startDateString,
+                endDateString
+            ))
+        {
             return
         }
 
-        if (TextUtils.isEmpty(endDateString)) {
-
-            etEndDate.error =
-                "Please enter an end date"
-
-            return
-        }
-
-        try {
-
+        try
+        {
             val formatter =
                 SimpleDateFormat(
                     "dd/MM/yyyy",
@@ -164,27 +239,40 @@ class AddBooking : ComponentActivity() {
                 )
 
             val startDate =
-                formatter.parse(startDateString)
+                formatter.parse(
+                    startDateString
+                )
 
             val endDate =
-                formatter.parse(endDateString)
+                formatter.parse(
+                    endDateString
+                )
 
-            val bookingData = hashMapOf<String, Any>(
+            if (startDate == null ||
+                endDate == null)
+            {
+                Toast.makeText(
+                    this,
+                    "Invalid date entered",
+                    Toast.LENGTH_SHORT
+                ).show()
 
-                "Student_ID" to studentId,
+                return
+            }
 
-                "Host_ID" to hostId,
+            val bookingData =
+                createBookingMap(
+                    studentId,
+                    startDate,
+                    endDate
+                )
 
-                "StartDate" to Timestamp(startDate),
-
-                "FinishDate" to Timestamp(endDate)
-
+            createBooking(
+                bookingData
             )
-
-            createBooking(bookingData)
-
-        } catch (e: Exception) {
-
+        }
+        catch (e: Exception)
+        {
             Toast.makeText(
                 this,
                 "Use format DD/MM/YYYY",
@@ -193,67 +281,146 @@ class AddBooking : ComponentActivity() {
         }
     }
 
+    //endregion
+
+    //region Validation
+
+    private fun validateForm(
+        startDate: String,
+        endDate: String
+    ): Boolean
+    {
+        if (TextUtils.isEmpty(startDate))
+        {
+            etStartDate.error =
+                "Please enter a start date"
+
+            return false
+        }
+
+        if (TextUtils.isEmpty(endDate))
+        {
+            etEndDate.error =
+                "Please enter an end date"
+
+            return false
+        }
+
+        return true
+    }
+
+    //endregion
+
+    //region Booking Object Creation
+
+    private fun createBookingMap(
+        studentId: String,
+        startDate: java.util.Date,
+        endDate: java.util.Date
+    ): HashMap<String, Any>
+    {
+        val bookingData =
+            HashMap<String, Any>()
+
+        bookingData["Student_ID"] =
+            studentId
+
+        bookingData["Host_ID"] =
+            hostId
+
+        bookingData["StartDate"] =
+            Timestamp(startDate)
+
+        bookingData["FinishDate"] =
+            Timestamp(endDate)
+
+        return bookingData
+    }
+
+    //endregion
+
+    //region Firebase Booking Creation
+
     private fun createBooking(
         bookingData: HashMap<String, Any>
-    ) {
-
+    )
+    {
         db.collection("Bookings")
             .get()
             .addOnSuccessListener { result ->
 
-                var highestNumber = 0
+                val bookingId =
+                    generateBookingId(result)
 
-                for (document in result) {
+                saveBookingToFirestore(
+                    bookingId,
+                    bookingData
+                )
+            }
+    }
 
-                    val documentId =
-                        document.id
+    private fun generateBookingId(
+        result: com.google.firebase.firestore.QuerySnapshot
+    ): String
+    {
+        var highestNumber = 0
 
-                    if (documentId.startsWith("B")) {
+        for (document in result)
+        {
+            val documentId =
+                document.id
 
-                        val number =
-                            documentId
-                                .substring(1)
-                                .toIntOrNull()
+            if (documentId.startsWith("B"))
+            {
+                val number =
+                    documentId
+                        .substring(1)
+                        .toIntOrNull()
 
-                        if (
-                            number != null &&
-                            number > highestNumber
-                        ) {
-                            highestNumber =
-                                number
-                        }
+                if (number != null)
+                {
+                    if (number > highestNumber)
+                    {
+                        highestNumber =
+                            number
                     }
                 }
+            }
+        }
 
-                val nextNumber =
-                    highestNumber + 1
+        val nextNumber =
+            highestNumber + 1
 
-                val bookingId =
-                    "B%03d".format(nextNumber)
+        return "B%03d".format(nextNumber)
+    }
 
-                db.collection("Bookings")
-                    .document(bookingId)
-                    .set(bookingData)
+    private fun saveBookingToFirestore(
+        bookingId: String,
+        bookingData: HashMap<String, Any>
+    )
+    {
+        db.collection("Bookings")
+            .document(bookingId)
+            .set(bookingData)
 
-                    .addOnSuccessListener {
+            .addOnSuccessListener {
 
-                        Toast.makeText(
-                            this,
-                            "Booking created: $bookingId",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                Toast.makeText(
+                    this,
+                    "Booking created: $bookingId",
+                    Toast.LENGTH_SHORT
+                ).show()
 
-                        finish()
-                    }
+                finish()
+            }
 
-                    .addOnFailureListener { e ->
+            .addOnFailureListener { e ->
 
-                        Toast.makeText(
-                            this,
-                            e.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                Toast.makeText(
+                    this,
+                    e.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 

@@ -14,25 +14,48 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Add Host Activity
  * Manages input collection and persistence for new host accommodation profiles into Firebase Firestore.
  */
-class AddHost : AppCompatActivity() {
+class AddHost : AppCompatActivity()
+{
 
     //region Member Variables
+
+    //region Buttons
+
     private lateinit var returnBtn: Button
     private lateinit var btnSaveHost: Button
+
+    //endregion
+
+    //region Text Fields
+
     private lateinit var etHostName: EditText
+    private lateinit var etHostSurname: EditText
+    private lateinit var etHostAddress: EditText
     private lateinit var etHostPhone: EditText
+    private lateinit var etHostEmail: EditText
+
+    //endregion
+
+    //region Spinners
+
     private lateinit var spinnerArea: Spinner
     private lateinit var spinnerBathroom: Spinner
 
-    private lateinit var etHostSurname: EditText
-    private lateinit var etHostAddress: EditText
-    private lateinit var etHostEmail: EditText
-
-
-    private val db = FirebaseFirestore.getInstance()
     //endregion
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    //region Firebase
+
+    private val db =
+        FirebaseFirestore.getInstance()
+
+    //endregion
+
+    //endregion
+
+    //region Activity Lifecycle
+
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_host)
 
@@ -40,127 +63,325 @@ class AddHost : AppCompatActivity() {
         setupListeners()
     }
 
+    //endregion
+
+    //region Initialisation
+
     /**
      * Binds internal variable declarations to corresponding XML views.
      */
-    private fun initialiseViews() {
-        returnBtn = findViewById(R.id.ReturnBtn)
-        btnSaveHost = findViewById(R.id.btnAddHostSubmit)
-        etHostName = findViewById(R.id.etHostName)
-        etHostPhone = findViewById(R.id.etHostPhone)
-        spinnerArea = findViewById(R.id.spinnerHostArea)
-        spinnerBathroom = findViewById(R.id.spinnerHostBathroom)
-        etHostSurname = findViewById(R.id.etHostSurname)
-        etHostAddress = findViewById(R.id.etHostAddress)
-        etHostEmail = findViewById(R.id.etHostEmail)
+    private fun initialiseViews()
+    {
+
+        initialiseButtons()
+
+        initialiseTextFields()
+
+        initialiseSpinners()
     }
+
+    //region Button Initialisation
+
+    private fun initialiseButtons()
+    {
+
+        returnBtn =
+            findViewById(R.id.ReturnBtn)
+
+        btnSaveHost =
+            findViewById(R.id.btnAddHostSubmit)
+    }
+
+    //endregion
+
+    //region Text Field Initialisation
+
+    private fun initialiseTextFields()
+    {
+
+        etHostName =
+            findViewById(R.id.etHostName)
+
+        etHostSurname =
+            findViewById(R.id.etHostSurname)
+
+        etHostAddress =
+            findViewById(R.id.etHostAddress)
+
+        etHostPhone =
+            findViewById(R.id.etHostPhone)
+
+        etHostEmail =
+            findViewById(R.id.etHostEmail)
+    }
+
+    //endregion
+
+    //region Spinner Initialisation
+
+    private fun initialiseSpinners()
+    {
+
+        spinnerArea =
+            findViewById(R.id.spinnerHostArea)
+
+        spinnerBathroom =
+            findViewById(R.id.spinnerHostBathroom)
+    }
+
+    //endregion
+
+    //endregion
+
+    //region Button Setup
 
     /**
      * Connects event handlers for navigation and form submission logic.
      */
-    private fun setupListeners() {
+    private fun setupListeners()
+    {
+
+        setupReturnButton()
+
+        setupSaveButton()
+    }
+
+    //region Return Button
+
+    private fun setupReturnButton()
+    {
+
         // Navigates back to the main control Dashboard
         returnBtn.setOnClickListener {
-            val intent = Intent(this, Dashboard::class.java)
+
+            val intent =
+                Intent(
+                    this,
+                    Dashboard::class.java
+                )
+
             startActivity(intent)
+
             finish()
         }
+    }
+
+    //endregion
+
+    //region Save Button
+
+    private fun setupSaveButton()
+    {
 
         // Saving input host profile to Firebase Firestore
         btnSaveHost.setOnClickListener {
+
             saveHostToFirestore()
         }
     }
 
+    //endregion
+
+    //endregion
+
+    //region Host Creation
+
     /**
      * Validates user entries and uploads a new host object to the 'Host Families' collection.
      */
-    private fun saveHostToFirestore() {
+    private fun saveHostToFirestore()
+    {
+
         val name = etHostName.text.toString().trim()
-        val phone = etHostPhone.text.toString().trim()
-        val area = spinnerArea.selectedItem?.toString() ?: "All"
-        val bathroom = spinnerBathroom.selectedItem?.toString() ?: "All"
+
         val surname = etHostSurname.text.toString().trim()
+
         val address = etHostAddress.text.toString().trim()
+
+        val phone = etHostPhone.text.toString().trim()
+
         val email = etHostEmail.text.toString().trim()
 
-        if (TextUtils.isEmpty(name)) {
-            etHostName.error = "Please enter host name"
+        val area = spinnerArea.selectedItem.toString()
+
+        val bathroom = spinnerBathroom.selectedItem.toString()
+
+        if (!validateForm(name, phone))
+        {
             return
         }
 
-        if (TextUtils.isEmpty(phone)) {
-            etHostPhone.error = "Please enter contact number"
-            return
-        }
-
-        val hostData = hashMapOf(
-
-            "Host_Name" to name,
-            "Host_Surname" to surname,
-            "Host_Address" to address,
-
-            "Host_Area" to area,
-            "Host_Bathroom" to bathroom,
-
-            "Host_PhoneNumber" to phone,
-            "Host_Email" to email
-
-        )
+        val hostData =
+            createHostMap(
+                name,
+                surname,
+                address,
+                area,
+                bathroom,
+                phone,
+                email
+            )
 
         createHost(hostData)
-
     }
 
-    private fun createHost(
-        hostData: HashMap<String, String>
-    )
+    //endregion
+
+    //region Validation
+
+    private fun validateForm(
+        name: String,
+        phone: String
+    ): Boolean {
+
+        if (TextUtils.isEmpty(name))
+        {
+
+            etHostName.error ="Please enter host name"
+
+            return false
+        }
+
+        if (TextUtils.isEmpty(phone))
+        {
+
+            etHostPhone.error = "Please enter contact number"
+
+            return false
+        }
+
+        return true
+    }
+
+    //endregion
+
+    //region Host Object Creation
+
+    private fun createHostMap(
+        name: String,
+        surname: String,
+        address: String,
+        area: String,
+        bathroom: String,
+        phone: String,
+        email: String
+    ): HashMap<String, String>
     {
+
+        val hostData = HashMap<String, String>()
+
+        hostData["Host_Name"] = name
+
+        hostData["Host_Surname"] = surname
+
+        hostData["Host_Address"] = address
+
+        hostData["Host_Area"] = area
+
+        hostData["Host_Bathroom"] = bathroom
+
+        hostData["Host_PhoneNumber"] = phone
+
+        hostData["Host_Email"] = email
+
+        return hostData
+    }
+
+    //endregion
+
+    //region Firebase Host Creation
+
+    private fun createHost(hostData: HashMap<String, String>)
+    {
+
         db.collection("Host Families")
             .get()
             .addOnSuccessListener { result ->
 
-                var highestNumber = 0
+                val hostId = generateHostId(result)
 
-                for (document in result) {
-
-                    val documentId = document.id
-
-                    if (
-                        documentId.startsWith("H")
-                    ) {
-
-                        val number =
-                            documentId
-                                .substring(1)
-                                .toIntOrNull()
-
-                        if (
-                            number != null &&
-                            number > highestNumber
-                        ) {
-                            highestNumber = number
-                        }
-                    }
-                }
-
-                val nextNumber =
-                    highestNumber + 1
-
-                val newHostId =
-                    "H%03d".format(nextNumber)
-
-                db.collection("Host Families")
-                    .document(newHostId)
-                    .set(hostData)
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Host record saved successfully!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, Dashboard::class.java))
-                        finish()
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(this, "Failed to save host: ${e.message}", Toast.LENGTH_SHORT).show()
-                    }
+                saveHostToFirestore(
+                    hostId,
+                    hostData
+                )
             }
     }
+
+    private fun generateHostId(
+        result: com.google.firebase.firestore.QuerySnapshot
+    ): String {
+
+        var highestNumber = 0
+
+        for (document in result)
+        {
+
+            val documentId =
+                document.id
+
+            if (documentId.startsWith("H"))
+            {
+
+                val number =
+                    documentId
+                        .substring(1)
+                        .toIntOrNull()
+
+                if (number != null)
+                {
+
+                    if (number > highestNumber)
+                    {
+
+                        highestNumber =
+                            number
+                    }
+                }
+            }
+        }
+
+        val nextNumber =
+            highestNumber + 1
+
+        return "H%03d".format(nextNumber)
+    }
+
+    private fun saveHostToFirestore(
+        hostId: String,
+        hostData: HashMap<String, String>
+    ) {
+
+        db.collection("Host Families")
+            .document(hostId)
+            .set(hostData)
+
+            .addOnSuccessListener {
+
+                Toast.makeText(
+                    this,
+                    "Host record saved successfully!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                startActivity(
+                    Intent(
+                        this,
+                        Dashboard::class.java
+                    )
+                )
+
+                finish()
+            }
+
+            .addOnFailureListener { e ->
+
+                Toast.makeText(
+                    this,
+                    "Failed to save host: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+    //endregion
 }

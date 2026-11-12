@@ -180,9 +180,11 @@ class MainActivity : AppCompatActivity()
 
     //region RecyclerView Mapping
 
-    private fun displayHosts(result: com.google.firebase.firestore.QuerySnapshot) {
+    private fun displayHosts(result: com.google.firebase.firestore.QuerySnapshot)
+    {
         val hostList = mutableListOf<HostData>()
-        for (document in result) {
+        for (document in result)
+        {
             val host = document.toObject(HostData::class.java)
             host.hostId = document.id
             hostList.add(host)
@@ -195,14 +197,16 @@ class MainActivity : AppCompatActivity()
 
     //region Firebase Queries
 
-    fun displayRecords() {
+    fun displayRecords()
+    {
         db.collection("Host Families")
             .get()
             .addOnSuccessListener { result -> displayHosts(result) }
             .addOnFailureListener { Log.e("Firebase", it.message.toString()) }
     }
 
-    fun filterArea(area: String) {
+    fun filterArea(area: String)
+    {
         db.collection("Host Families")
             .whereEqualTo("Host_Area", area)
             .get()
@@ -218,7 +222,8 @@ class MainActivity : AppCompatActivity()
             .addOnFailureListener { Log.e("Firebase", it.message.toString()) }
     }
 
-    fun filterBoth(area: String, bathroom: String) {
+    fun filterBoth(area: String, bathroom: String)
+    {
         db.collection("Host Families")
             .whereEqualTo("Host_Area", area)
             .whereEqualTo("Host_Bathroom", bathroom)
