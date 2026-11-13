@@ -1,17 +1,39 @@
-package com.example.sba_application
+//region BookingData.kt
 
-import com.google.firebase.Timestamp
+    //TODO: write description of what data calss is for and what it do
 
-data class BookingData(
+    //region Packages
 
-    var bookingId: String = "",
+        package com.example.sba_application
 
-    val Student_ID: String = "",
+    //endregion
 
-    val Host_ID: String = "",
+    //region Imports
 
-    val StartDate: Timestamp? = null,
+        import com.google.firebase.Timestamp
 
-    val FinishDate: Timestamp? = null
+    //endregion
 
-)
+    //region Booking Data Class
+
+        data class BookingData(
+
+            //region Variables
+
+                var bookingId: String = "",
+
+                val Student_ID: String = "",
+
+                val Host_ID: String = "",
+
+                val StartDate: Timestamp? = null,
+
+                val FinishDate: Timestamp? = null
+
+            //endregion
+
+        )
+
+    //endregion
+
+//endregion
